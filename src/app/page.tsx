@@ -1,8 +1,9 @@
 import Tags from "@/components/Tags";
+import Tweet from "@/components/Tweet";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center gap-4 px-2 pt-20 selection:bg-cyan-900 selection:text-cyan-100">
+    <div className="flex min-h-screen flex-col items-center gap-4 px-2 pt-20 selection:bg-cyan-900 selection:text-cyan-100 z-20">
       <article
         className="rounded-full
         p-[1px]
@@ -11,8 +12,7 @@ export default function Home() {
         from-blue-500
         via-cyan-400
         to-blue-300
-        font-semibold
-        "
+        font-medium"
       >
         <div
           className="rounded-full mx-auto
@@ -23,10 +23,11 @@ export default function Home() {
           Beta Release
         </div>
       </article>
-      <h2 className="md:text-7xl text-3xl sm:text-5xl font-semibold z-0 inline-flex bg-gradient-to-br from-neutral-100 via-slate-200 to-slate-400 bg-clip-text leading-tight text-transparent tracking-tight">
+      <h2 className="md:text-8xl text-5xl sm:text-6xl font-semibold z-0 inline-flex bg-gradient-to-br from-neutral-100 via-slate-200 to-slate-400 bg-clip-text leading-tight text-transparent tracking-tight">
         Twinker
       </h2>
       <Tags />
+      <Tweet />
     </div>
   );
 }
