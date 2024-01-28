@@ -1,5 +1,5 @@
 import Tags from "@/components/Tags";
-import Tweet from "@/components/Tweet";
+import TweetForm from "@/components/TweetForm";
 
 export default function Home() {
   return (
@@ -27,7 +27,7 @@ export default function Home() {
         Twinker
       </h2>
       <Tags />
-      <Tweet />
+      <TweetForm />
     </div>
   );
 }
