@@ -20,7 +20,7 @@ export function TweetCard(data: TweetCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [fDate, setfDate] = useState("Just Now");
   const texts =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl id tristique tincidunt, nisl nunc euismod nisi, in tincidunt nisl nunc euismod nisi.";
+    "Lorem ipsum dolor sit amet...... Lorem ipsum is a string of nonsensical Latin-derived words commonly used as placeholder text in graphic design, web design, and publishing. It allows designers and publishers to see how layout and fonts will look without the distraction of actual content.";
   useEffect(() => {
     console.log(data);
     const date = new Date(data.data?.creation_date);
@@ -52,10 +52,10 @@ export function TweetCard(data: TweetCardProps) {
   }, [ref]);
 
   return (
-    <>
+    <div className="relative">
       <div
         ref={ref}
-        className="relative border overflow-hidden text-wrap border-gray-700 bg-gradient-to-tr from-slate-900 via-slate-950 to-gray-950 shadow-inner shadow-gray-700 rounded-lg mx-auto p-4 mb-32 before:absolute before:w-32 before:h-20 before:right-2 before:bg-cyan-700/90 before:-z-10 before:rounded-full before:blur-2xl hover:before:-top-5 hover:after:-top-16 before:-top-12 z-10 after:absolute after:w-24 after:h-24 after:bg-blue-800/40 after:-z-10 before:duration-500 after:duration-500 before:transition-all after:transition-all after:rounded-full after:blur after:-top-12 after:-right-6 min-w-80 max-w-[500px]"
+        className="relative border overflow-hidden text-wrap border-gray-700 bg-gradient-to-tr from-slate-900 via-slate-950 to-gray-950 shadow-inner shadow-gray-700 rounded-lg mx-auto p-4 mb-44 md:mb-32 before:absolute before:w-32 before:h-20 before:right-2 before:bg-cyan-700/90 before:-z-10 before:rounded-full before:blur-2xl hover:before:-top-5 hover:after:-top-16 before:-top-12 z-10 after:absolute after:w-24 after:h-24 after:bg-blue-800/40 after:-z-10 before:duration-500 after:duration-500 before:transition-all after:transition-all after:rounded-full after:blur after:-top-12 after:-right-6 min-w-80 max-w-[500px]"
       >
         <div className="flex space-x-4 items-center">
           {data.data?.user?.profile_pic_url ? (
@@ -79,7 +79,7 @@ export function TweetCard(data: TweetCardProps) {
             </h4>
             <div className="flex items-center pt-1">
               <span className="text-xs text-gray-500 dark:text-gray-400">
-                {fDate || "Just now"}
+                {data.data?.date ? fDate : "Just Now"}
               </span>
             </div>
           </div>
@@ -118,7 +118,15 @@ export function TweetCard(data: TweetCardProps) {
           </div>
         </div>
       </div>
-    </>
+      <Button
+        className="absolute bottom-2 right-2 z-10"
+        variant="outline"
+        size="icon"
+        onClick={clickImage}
+      >
+        <Download className="text-blue-500" />
+      </Button>
+    </div>
   );
 }
 

@@ -5,10 +5,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { TweetCard } from "./TweetCard";
-// import { getId } from "@/actions";
 const TweetForm = () => {
   const [tweet, setTweet] = useState("");
-  const [tweetId, setTweetId] = useState("");
   const [result, setResult] = useState({});
   const url = "https://twitter154.p.rapidapi.com/tweet/details?tweet_id=";
   const options = {
@@ -19,10 +17,8 @@ const TweetForm = () => {
     },
   };
   async function run() {
-    setTweetId(getId(tweet));
-    console.log(tweetId);
     try {
-      const response = await fetch(`${url}${tweetId}`, options);
+      const response = await fetch(`${url}${tweet.split("/").pop()?.split("?")[0]}`, options);
       const res = await response.json();
       setResult(res);
       console.log(result);
@@ -36,7 +32,7 @@ const TweetForm = () => {
       <div>
         <TweetCard data={result} />
       </div>
-      <div className="z-0 backdrop-blur-md fixed left-1/2 -translate-x-1/2 bottom-6 border rounded-md mt-6 py-6 px-4 md:min-w-72 gap-2 flex items-center justify-center">
+      <div className="z-10 backdrop-blur-md fixed left-1/2 -translate-x-1/2 bottom-6 border rounded-md mt-6 py-6 px-4 md:min-w-xl gap-2 flex flex-wrap md:flex-nowrap items-center justify-center">
         <Input
           type="url"
           required
@@ -44,6 +40,7 @@ const TweetForm = () => {
           id="tweet"
           placeholder="Link to Tweet"
           value={tweet}
+          className="min-w-36"
           onChange={(e) => setTweet(e.target.value)}
         />
 
@@ -56,10 +53,3 @@ const TweetForm = () => {
 };
 
 export default TweetForm;
-
-function getId(tweetUrl: string): string {
-  const url = new URL(tweetUrl);
-  const pathComponents = url.pathname.split('/');
-  const tweetId = pathComponents[pathComponents.length - 1];
-  return tweetId;
-}
