@@ -24,7 +24,14 @@ export function TweetCard(data: TweetCardProps) {
   useEffect(() => {
     const date = new Date(data.data?.creation_date);
     console.log(date);
-    setfDate(date.toISOString);
+    setfDate(
+      date.toLocaleDateString("en-US", {
+        weekday: "short",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      })
+    );
     console.log(fDate);
   }, [data]);
 
