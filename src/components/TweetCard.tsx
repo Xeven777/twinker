@@ -22,17 +22,10 @@ export function TweetCard(data: TweetCardProps) {
   const texts =
     "Lorem ipsum dolor sit amet...... Lorem ipsum is a string of nonsensical Latin-derived words commonly used as placeholder text in graphic design, web design, and publishing. It allows designers and publishers to see how layout and fonts will look without the distraction of actual content.";
   useEffect(() => {
-    console.log(data);
     const date = new Date(data.data?.creation_date);
-    setfDate(
-      date.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      })
-    );
+    console.log(date);
+    setfDate(date.toISOString);
+    console.log(fDate);
   }, [data]);
 
   const clickImage = useCallback(() => {
@@ -42,7 +35,7 @@ export function TweetCard(data: TweetCardProps) {
     toPng(ref.current, { cacheBust: true })
       .then((dataUrl) => {
         const link = document.createElement("a");
-        link.download = "Twinker.png";
+        link.download = "Tweeto.png";
         link.href = dataUrl;
         link.click();
       })
@@ -75,7 +68,7 @@ export function TweetCard(data: TweetCardProps) {
           )}
           <div className="space-y-1">
             <h4 className="text-sm font-semibold">
-              @{data.data?.user?.username || "twinker"}
+              @{data.data?.user?.username || "tweeto"}
             </h4>
             <div className="flex items-center pt-1">
               <span className="text-xs text-gray-500 dark:text-gray-400">

@@ -23,8 +23,8 @@ export default function Home() {
           Beta Release
         </div>
       </article>
-      <h2 className="md:text-8xl text-5xl sm:text-6xl font-semibold z-0 inline-flex bg-gradient-to-br from-neutral-100 via-slate-200 to-slate-400 bg-clip-text leading-tight text-transparent tracking-tight">
-        Twinker
+      <h2 className="md:text-8xl text-5xl sm:text-6xl font-bold z-0 inline-flex bg-gradient-to-br from-blue-500 via-blue-400 to-slate-300 bg-clip-text leading-tight text-transparent tracking-tight">
+        Tweeto
       </h2>
       <Tags />
       <TweetForm />
