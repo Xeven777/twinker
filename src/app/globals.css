@@ -41,3 +41,22 @@
     text-wrap: balance;
   }
 }
+
+.image-container {
+  display: grid;
+  gap: 1px;
+}
+
+.single-image-container {
+  width: 100%;
+}
+
+.image-item {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Dynamically adjust the number of columns based on the number of images */
+.image-container {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}

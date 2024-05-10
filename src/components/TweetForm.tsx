@@ -18,10 +18,14 @@ const TweetForm = () => {
   };
   async function run() {
     try {
-      const response = await fetch(`${url}${tweet.split("/").pop()?.split("?")[0]}`, options);
+      const response = await fetch(
+        `${url}${tweet.split("/").pop()?.split("?")[0]}`,
+        options
+      );
       const res = await response.json();
       setResult(res);
       // console.log(result);
+      // console.log(result.text);
     } catch (error) {
       console.error(error);
     }

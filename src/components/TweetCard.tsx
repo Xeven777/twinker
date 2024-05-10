@@ -1,6 +1,7 @@
 "use client";
 import userpic from "../assets/Upstream-4.png";
 import { toPng } from "html-to-image";
+import Markdown from "react-markdown";
 import { Button } from "@/components/ui/button";
 import {
   BarChart2Icon,
@@ -10,7 +11,8 @@ import {
   RepeatIcon,
 } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
+import { cn } from "@/lib/utils";
 
 interface TweetCardProps {
   data: any;
@@ -18,22 +20,8 @@ interface TweetCardProps {
 
 export function TweetCard(data: TweetCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [fDate, setfDate] = useState("Just Now");
   const texts =
     "Lorem ipsum dolor sit amet...... Lorem ipsum is a string of nonsensical Latin-derived words commonly used as placeholder text in graphic design, web design, and publishing. It allows designers and publishers to see how layout and fonts will look without the distraction of actual content.";
-  useEffect(() => {
-    const date = new Date(data.data?.creation_date);
-    console.log(date);
-    setfDate(
-      date.toLocaleDateString("en-US", {
-        weekday: "short",
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })
-    );
-    console.log(fDate);
-  }, [data]);
 
   const clickImage = useCallback(() => {
     if (ref.current === null) {
@@ -79,25 +67,39 @@ export function TweetCard(data: TweetCardProps) {
             </h4>
             <div className="flex items-center pt-1">
               <span className="text-xs text-gray-500 dark:text-gray-400">
-                {data.data?.date ? fDate : "Just Now"}
+                {/* {data.data?.date ? fDate : "Just Now"} */}
               </span>
             </div>
           </div>
         </div>
         <div className="mt-4">
-          <p className="text-sm">{data.data?.text || texts}</p>
+          <p>
+            <Markdown>{data.data?.text || texts}</Markdown>
+          </p>
 
-          {data.data?.media_url && (
-            <div className="mt-4 max-h-[550px] overflow-hidden rounded-lg w-full">
-              <Image
-                className="w-full h-auto"
-                src={data.data?.media_url[0]}
-                alt=""
-                width={430}
-                height={200}
-              />
-            </div>
-          )}
+          <div className="mt-4">
+            {data.data?.media_url && (
+              <div
+                className={` ${
+                  data.data.media_url.length > 1
+                    ? "image-container grid-container"
+                    : "single-image-container"
+                }`}
+              >
+                {data.data.media_url.map((url:string, index:number) => (
+                  <div key={index} className="image-item w-full">
+                    <Image
+                      className="w-full h-full object-cover"
+                      src={url}
+                      alt=""
+                      width={430}
+                      height={200}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
           <div className="mt-6">
             <Button className="mr-2 group" variant="ghost" size="sm">
               <HeartIcon className="mr-2 h-4 w-4 text-rose-600 group-hover:scale-125 transition-all group-hover:animate-pulse" />
